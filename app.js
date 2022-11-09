@@ -1,60 +1,97 @@
 #!usr/bin/node
-
 class LinkedList {
-  constructur(head) {
+  constructor(head) {
     this.head = head
-
   }
-  appendNode(node, value = 'Appended Node') {
-    let tmp = node;
+  appendNode(value = 'Appended Node') {
+    let tmp = this.head;
     while (tmp.nextNode !== null) {
       tmp = tmp.nextNode
     }
     tmp.nextNode = new Node(value)
   }
-  prependNode(node, value = 'Prepended Node') {
+  prependNode(value = 'Prepended Node') {
     let tmp = new Node(value)
-    tmp.nextNode = node
+    tmp.nextNode = this.head
     return tmp
   }
-  size(node) {
+  size() {
     let i = 0;
-    let tmp = node
+    let tmp = this.head
     while (tmp !== null) {
       tmp = tmp.nextNode
       i++
     }
     return `There currently are ${i} nodes in the list`
   }
-  head(node) {
-    let tmp = node;
+  getHead() {
+    let tmp = this.head;
     tmp.nextNode = null
     return tmp
   }
-  tail(node) {
-    let tmp = node;
+  getTail() {
+    let tmp = this.head;
     while (tmp.nextNode !== null) {
       tmp = tmp.nextNode
     }
     return tmp
   }
-  at(index) {
-  }
   pop() {
-    head
+    let tmp = this.head;
+    while (tmp.nextNode !== null) {
+      tmp = tmp.nextNode
+    }
+    tmp = null
+    return tmp
+  }
+  at(index) {
+    let i = 0;
+    let tmp = this.head;
+    while (i !== index) {
+      tmp = tmp.nextNode
+      i++
+    }
+    return tmp
+  }
+  contains(value) {
+    let tmp = this.head;
+    while (tmp.nextNode !== null) {
+      if (tmp.data == value) {
+        return true
+      }
+      tmp = tmp.nextNode
+    }
+    return false
+  }
+  find(value) {
+
+    let tmp = this.head;
+    let i = 0;
+    while (tmp !== null) {
+      if (tmp.data == value) {
+        return i
+      } else {
+        tmp = tmp.nextNode
+        i = i + 1
+      }
+    }
+    return null
   }
 }
+
 class Node {
-  constructor(data, nextNode) {
+  constructor(data) {
     this.data = data;
     this.nextNode = null;
   }
 }
-let head = new Node('Head Node')
-let node1 = new Node('Node 1');
-let node2 = new Node('Node 2');
-head.nextNode = node1;
+let node = new Node('Head Node')
+let node1 = new Node('Node 2');
+let node2 = new Node('Node 3');
+node.nextNode = node1;
 node1.nextNode = node2;
-const LList = new LinkedList(head)
-LList.appendNode(head, 'Node 3')
-console.log(head)
+const linkedList = new LinkedList(node)
+linkedList.appendNode('Node 4')
+linkedList.appendNode('Node 5')
+console.log(linkedList.size())
+console.log(linkedList.find('Node 5'))
