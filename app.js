@@ -22,7 +22,7 @@ class LinkedList {
       tmp = tmp.nextNode
       i++
     }
-    return `There currently are ${i} nodes in the list`
+    return i
   }
   getHead() {
     let tmp = this.head;
@@ -64,7 +64,6 @@ class LinkedList {
     return false
   }
   find(value) {
-
     let tmp = this.head;
     let i = 0;
     while (tmp !== null) {
@@ -72,10 +71,24 @@ class LinkedList {
         return i
       } else {
         tmp = tmp.nextNode
-        i = i + 1
+        i++
       }
     }
     return null
+  }
+
+  toString() {
+    let tmp = this.head;
+    let size = this.size()
+    let i = 0;
+    let string = '';
+    while (i !== size) {
+      string = string.concat('->', tmp.data)
+      tmp = tmp.nextNode
+      i++
+    }
+    let result = string.substring(2).concat('->', null)
+    console.log(result)
   }
 }
 
@@ -92,6 +105,7 @@ node.nextNode = node1;
 node1.nextNode = node2;
 const linkedList = new LinkedList(node)
 linkedList.appendNode('Node 4')
-linkedList.appendNode('Node 5')
-console.log(linkedList.size())
-console.log(linkedList.find('Node 5'))
+linkedList.toString()
+const newHead = linkedList.prependNode()
+const newLinkedList = new LinkedList(newHead)
+newLinkedList.toString()
