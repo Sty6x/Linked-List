@@ -38,11 +38,12 @@ class LinkedList {
   }
   pop() {
     let tmp = this.head;
+    let prev = null;
     while (tmp.nextNode !== null) {
+      prev = tmp;
       tmp = tmp.nextNode
     }
-    tmp = null
-    return tmp
+    prev.nextNode = null
   }
   at(index) {
     let i = 0;
@@ -90,8 +91,14 @@ class LinkedList {
     let result = string.substring(2).concat('->', null)
     console.log(result)
   }
+  insertAt(index, value = 'inserted node') {
+    let node = this.at(index)
+    let newNode = new Node(value)
+    // replacing the indexed nodes nextnode and appended to the new Node
+    newNode.nextNode = node.nextNode
+    node.nextNode = newNode
+  }
 }
-
 class Node {
   constructor(data) {
     this.data = data;
@@ -105,7 +112,5 @@ node.nextNode = node1;
 node1.nextNode = node2;
 const linkedList = new LinkedList(node)
 linkedList.appendNode('Node 4')
+linkedList.pop()
 linkedList.toString()
-const newHead = linkedList.prependNode()
-const newLinkedList = new LinkedList(newHead)
-newLinkedList.toString()
